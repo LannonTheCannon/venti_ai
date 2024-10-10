@@ -7,15 +7,16 @@ from dotenv import load_dotenv
 import os
 
 #set up OpenAI client
-client = openai(api_key=os('OPEN_API_KEY'))
+api_key = st.secrets.get("OPEN_API_KEY")
+client = openai.OpenAI(api_key=api_key)
 
 def create_assistant():
     try:
         assistant = client.beta.assistants.create(
             name="Venti AI",
             instructions="You are Venti from Genshin impact",
-            tools=[{"type": "code_interperter"}],
-            modle="gpt-4o-mini"
+            tools=[{"type": "code_interpreter"}],
+            model="gpt-4o-mini"
         )
         return assistant
     except Exception as e:
@@ -34,10 +35,10 @@ if __name__ == '__main__':
     assistant = create_assistant()
     thread = create_thread()
     if assistant:
-        print(f'Assostant ID {assistant.id}')
+        st.info(f'Assostant ID {assistant.id}')
     else:
-        print('Failde to created an assistant')
+        st.error('Failde to created an assistant')
     if thread:
-        print('Thread created with id{thread.id}')
+        st.info(f'Thread created with ID {thread.id}')
     else:
-        print('Failed to create a thread')
+        st.error('Failed to create a thread')
