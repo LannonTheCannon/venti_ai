@@ -6,11 +6,8 @@ from dotenv import load_dotenv
 
 import os
 
-#Load environment variables
-load_dontenv()
-
 #set up OpenAI client
-client = openai(api_key=os.getenv('OPEN_API_KEY'))
+client = openai(api_key=os('OPEN_API_KEY'))
 
 def create_assistant():
     try:
