@@ -45,7 +45,7 @@ def get_assistant_response(assistant_id, thread_id, user_input):
 
 def display_chatbot():
     for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
+        with st.chat_message(message["role"], avatar = get_avatar(message["role"])):
             st.markdown(message["content"])
 
     prompt = st.chat_input("Ask me anything")
@@ -54,7 +54,7 @@ def display_chatbot():
         with st.chat_message("user"):
             st.markdown(prompt)
 
-        with st.chat_message("assistant"):
+        with st.chat_message("assistant", avatar = get_avatar("assistant")):
             message_placeholder = st.empty()
             full_response = get_assistant_response(
                 ASSISTANT_ID,
@@ -78,6 +78,7 @@ def get_avatar(role):
         return "https://cdn.discordapp.com/attachments/1283594311098695806/1283595662687998054/venti_chivi_2.png?ex=66e3911e&is=66e23f9e&hm=637e20216eccef62f792dc420579baae3b3f814976ea07bfc6b0b19a3f2cfe72&"
     else:
         return None
+    
 def main():
     with st.sidebar:
         st.subheader('About Venti')
