@@ -71,6 +71,13 @@ def home_page():
     st.title("Welcome to Venti's protfolio")
     st.image("https://ih1.redbubble.net/image.3616127863.0902/flat,750x,075,f-pad,750x1000,f8f8f8.u1.jpg")
 
+def get_avatar(role):
+    if role == "user":
+        return "https://cdn.discordapp.com/attachments/1283594311098695806/1283596377942655056/yin_chivi.png?ex=66e391c8&is=66e24048&hm=8008e6878fbc5225f2d553522a08c361b8b81a6f1fff87cf987b81345b87c0b6&"
+    elif role == "assistant":
+        return "https://cdn.discordapp.com/attachments/1283594311098695806/1283595662687998054/venti_chivi_2.png?ex=66e3911e&is=66e23f9e&hm=637e20216eccef62f792dc420579baae3b3f814976ea07bfc6b0b19a3f2cfe72&"
+    else:
+        return None
 def main():
     with st.sidebar:
         st.subheader('About Venti')
