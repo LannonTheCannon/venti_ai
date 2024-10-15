@@ -20,7 +20,7 @@ st.title("AI Chatbot")
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-def get_assistant_response(assistant_id, thread_id, user_input):
+def chatbot(assistant_id, thread_id, user_input):
     try:
         client.beta.threads.messages.create(
             thread_id=thread_id,
@@ -70,5 +70,17 @@ def home_page():
     st.title("Welcome to Venti's protfolio")
     st.image("https://ih1.redbubble.net/image.3616127863.0902/flat,750x,075,f-pad,750x1000,f8f8f8.u1.jpg")
 
-home_page()
+
     
+def main():
+    with st.sidebar:
+        st.subheader('About Venti')
+    sections = ['Talk to Venti', 'Home Page']
+    select_section = st.sidebar.radio('choose a section',sections)
+    if select_section == 'Talk to Venti':
+        chatbot()
+    elif select_section == 'Home Page':
+        home_page()
+
+if __name__ == '__main__':
+    main()
