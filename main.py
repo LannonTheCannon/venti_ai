@@ -20,14 +20,14 @@ st.title("AI Chatbot")
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-def chatbot(assistant_id, thread_id, user_input):
+def get_assistant_response(assistant_id, thread_id, user_input):
     try:
         client.beta.threads.messages.create(
             thread_id=thread_id,
             role="user",
             content=user_input
         )
-        run = client.beta.thereads.runs.create(
+        run = client.beta.threads.runs.create(
             thread_id=thread_id,
             assistant_id=assistant_id
         )
@@ -43,42 +43,41 @@ def chatbot(assistant_id, thread_id, user_input):
         st.error(f"Error getting assistant response: {str(e)}")
         return "I'm sorry, but an error occurred while processing your request."
 
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+def display_chatbot():
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
 
-prompt = st.chat_input("Ask me anything")
-if prompt:
-    st.session_state.messages.append({"role":"user", "content": prompt})
-    with st.chat_message("user"):
-        st.markdown(prompt)
+    prompt = st.chat_input("Ask me anything")
+    if prompt:
+        st.session_state.messages.append({"role":"user", "content": prompt})
+        with st.chat_message("user"):
+            st.markdown(prompt)
 
-    with st.chat_message("assistant"):
-        message_placeholder = st.empty()
-        full_response = get_assistant_response(
-            ASSISTANT_ID,
-            THREAD_ID,
-            prompt
-        )
-        message_placeholder.markdown(full_response)
-    st.session_state.messages.append({"role": "assistant", "content": full_response})
+        with st.chat_message("assistant"):
+            message_placeholder = st.empty()
+            full_response = get_assistant_response(
+                ASSISTANT_ID,
+                THREAD_ID,
+                prompt
+            )
+            message_placeholder.markdown(full_response)
+        st.session_state.messages.append({"role": "assistant", "content": full_response})
 
-st.sidebar.write(f"Assistant ID: {ASSISTANT_ID}")
-st.sidebar.write(f"Thread ID: {THREAD_ID}")
+##    st.sidebar.write(f"Assistant ID: {ASSISTANT_ID}")
+##    st.sidebar.write(f"Thread ID: {THREAD_ID}")
 
 def home_page():
     st.title("Welcome to Venti's protfolio")
     st.image("https://ih1.redbubble.net/image.3616127863.0902/flat,750x,075,f-pad,750x1000,f8f8f8.u1.jpg")
 
-
-    
 def main():
     with st.sidebar:
         st.subheader('About Venti')
     sections = ['Talk to Venti', 'Home Page']
     select_section = st.sidebar.radio('choose a section',sections)
     if select_section == 'Talk to Venti':
-        chatbot()
+        display_chatbot()
     elif select_section == 'Home Page':
         home_page()
 
