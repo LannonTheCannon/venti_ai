@@ -73,7 +73,7 @@ def home_page():
 
 def get_avatar(role):
     if role == "user":
-        return "./images/yin.png"
+        return "./images/chibi.png"
     elif role == "assistant":
         return "./images/venti.png"
     else:
