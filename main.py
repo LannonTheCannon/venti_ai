@@ -12,7 +12,7 @@ THREAD_ID='thread_Wr3jipOFdp0EyiqZfcINPvV1'
 
 api_key = st.secrets.get("OPENAI_API_KEY")
 if not api_key:
-    st.errpr('OpenAI API Key was not found. Please se it in Streamlit secrets or as an')
+    st.error('OpenAI API Key was not found. Please se it in Streamlit secrets or as an')
     st.stop()
 client = openai.OpenAI(api_key=api_key)
 
