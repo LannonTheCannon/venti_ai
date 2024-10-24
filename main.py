@@ -6,6 +6,8 @@ import time
 
 import os
 
+from streamlit_extras.let_it_rain import rain
+
 st.set_page_config(page_title="AI Chatbot", page_icon="", layout="wide")
 ASSISTANT_ID='asst_z83oVKRWH4nk2JJWYIPYw4FP'
 THREAD_ID='thread_Wr3jipOFdp0EyiqZfcINPvV1'
@@ -66,8 +68,16 @@ def display_chatbot():
 
 ##    st.sidebar.write(f"Assistant ID: {ASSISTANT_ID}")
 ##    st.sidebar.write(f"Thread ID: {THREAD_ID}")
-
+def emoji_rain():
+    rain(
+        emoji="🤩",
+        font_size=54,
+        falling_speed=5,
+        animation_length= [2, 's'],
+    )
+    
 def home_page():
+    emoji_rain()
     st.title("Welcome to Venti's protfolio")
     st.image("https://ih1.redbubble.net/image.3616127863.0902/flat,750x,075,f-pad,750x1000,f8f8f8.u1.jpg")
     st.header("Story about Venti")
