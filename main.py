@@ -93,6 +93,10 @@ def home_page():
     st.header("What do you need for leveling up to max")
     st.image("./images/total cost_1.png")
     img = image_select("Select a image", ["./images/venti.png", "./images/paimeng.png", "./images/yin.png"], use_container_width=False)
+    sentiment_mapping = ["one", "two", "three", "four", "five"]
+    selected = st.feedback("stars")
+    if selected is not None:
+        st.markdown(f"You selected {sentiment_mapping[selected]} star(s).")
     
 def get_avatar(role):
     if role == "user":
