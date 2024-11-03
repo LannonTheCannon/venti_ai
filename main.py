@@ -12,7 +12,7 @@ from streamlit_image_select import image_select
 
 st.set_page_config(page_title="AI Chatbot", page_icon="", layout="wide")
 ASSISTANT_ID='asst_z83oVKRWH4nk2JJWYIPYw4FP'
-THREAD_ID='thread_TwS5xrrg35zY8EGkT8hvo6Ku'
+THREAD_ID='thread_egYTgWkaZ3RcPWxQpj6Rwcn9'
 
 api_key = st.secrets.get("OPENAI_API_KEY")
 if not api_key:
