@@ -39,7 +39,7 @@ def get_assistant_response(assistant_id, thread_id, user_input):
             run_status = client.beta.threads.runs.retrieve(thread_id=thread_id, run_id=run.id)
             if run_status.status == 'completed':
                 break
-             time.sleep(1)
+            time.sleep(1)
         messages = client.beta.threads.messages.list(thread_id=thread_id)
         
         return messages.data[0].content[0].text.value
@@ -126,10 +126,15 @@ def home_page():
 
     elif img == "./images/yin.png":
         st.title("Welcom to Lumine's protflio")
-        tell_about_yin = get_assistant_respones(ASSISTANT_ID, THREAD_ID, 'tell me about Lumine')
+        tell_about_yin = get_assistant_response(ASSISTANT_ID, THREAD_ID, 'tell me about Lumine')
         respond = get_chat_stream(tell_about_yin)
-        st.write("respond")
+        st.write(respond)
         st.image("https://i.pinimg.com/736x/91/d9/d7/91d9d7e8de77a69386f3e4b6e70f1fc8.jpg")
+        st.header("Who is Lumine")
+        st.write("Lumine is the female version of the Traveler, the playable protagonist of the video game Genshin Impact. The player chooses either Aether (male) or Lumine (female) to be the Traveler, while the other becomes the Traveler's sibling.")
+        st.header("About Lumine")
+        st.write("At the beginning of the game, both genders are twin siblings from another world, traveling throughout the universe, until an unknown god blocked and captured one of them, and sealed their power to travel, leaving them stranded on Teyvat. They are accompanied by a travel companion named Paimon throughout their journey. She is also a member of the Justice Society of the Omniverse")
+        st.image("https://static.wikia.nocookie.net/fanfiction/images/b/bf/Lumine_Genshin_Impact.png/revision/latest/scale-to-width-down/1000?cb=20211023052701")
     sentiment_mapping = ["I don't realy like this", "I am OK with it", "I kind of like it", "I realy like this", "'This is my wife!'"]
     selected = st.feedback("stars") 
     if selected is not None:
